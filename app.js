@@ -19,7 +19,7 @@ function Product(name, src){
   this.filepath = `img/${src}`;
   this.votes = 0;
   this.views = 0;
-  
+
   allProducts.push(this);
 }
 
@@ -48,38 +48,56 @@ new Product('wine-glass', 'wine-glass.jpg');
 
 var recentRandomNumbers = [];
 
+// function renderMostViewed(){
+//   var mostViewed;
+//   var clicks = 0;
+//   for(var i = 0; i < allProducts.length; i++){
+//     // loop over my allProducts array
+//     // find the product instance that has the same name as the product that was clicked on
+//     // increment the votes on that product
+//     if(allProducts[i].votes > clicks){
+//       clicks = allProducts[i].votes;
+//       mostViewed = allProducts[i];
+//     }
+//   }
+
+//   //Create h2 and append it to the DOM for displaying results
+//   var h2El = document.createElement('h2');
+//   h2El.textContent = `The most popular product is  ${mostViewed.title} with ${mostViewed.votes} votes`;
+//   resultsEl.appendChild(h2El);
+
 function render(){
 
   var randomIndex = random(0, allProducts.length-1);
-  
+
   while(recentRandomNumbers.includes(randomIndex)){
     randomIndex = random(0, allProducts.length-1);
   }
-  
+
   if(recentRandomNumbers.length > 3){
     recentRandomNumbers.shift();
   }
-  
+
   recentRandomNumbers.push(randomIndex);
-  
+
   allProducts[randomIndex].views++;
-  
+
   productOneEl.src = allProducts[randomIndex].filepath;
   productOneEl.alt = allProducts[randomIndex].name;
   productOneEl.title = allProducts[randomIndex].name;
-  
+
   var randomIndex = random(0, allProducts.length-1);
-  
+
   while(recentRandomNumbers.includes(randomIndex)){
     randomIndex = random(0, allProducts.length-1);
   }
-  
+
   if(recentRandomNumbers.length > 3){
     recentRandomNumbers.shift();
   }
-  
+
   allProducts[randomIndex].views++;
-  
+
   productTwoEl.src = allProducts[randomIndex].filepath;
   productTwoEl.alt = allProducts[randomIndex].name;
   productTwoEl.title = allProducts[randomIndex].name;
@@ -89,19 +107,20 @@ function random(min, max){
   return Math.floor(Math.random() * (max - min +1) + min);
 }
 
+
 function handleClick(e){
   var productName = e.target.title;
-  
+
   if(e.target.id === 'product-container'){
     alert('click a product!');
   }
-  
+
   if(votesRemaining === 0){
     productContainerEl.removeEventListener('click', handleClick);
     // render the results to the DOM
     renderChart();
   }
-  
+
   for(var i = 0; i < allProducts.length; i++){
     if(productName === allProducts[i].name){
       allProducts[i].votes++;
@@ -120,7 +139,7 @@ render();
 function renderChart(){
   var namesArray = [];
   var votesArray = [];
-  
+
   for(var i = 0; i < allProducts.length; i++){
     namesArray.push(allProducts[i].name);
     votesArray.push(allProducts[i].votes);
@@ -132,10 +151,10 @@ function renderChart(){
   }
 
   console.log('my local storage is: ', localStorage);
-  
+
   var localStorageProducts = JSON.parse(localStorage.getItem('products'));
   console.log('my products from local storage', localStorageProducts);
-  
+
   if(localStorage.getItem('products')){
     allProducts = localStorageProducts;
   } else {
