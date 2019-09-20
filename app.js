@@ -19,9 +19,10 @@ function Product(name, src){
   this.filepath = `img/${src}`;
   this.votes = 0;
   this.views = 0;
-
+  
   allProducts.push(this);
 }
+
 
 new Product('bag', 'bag.jpg');
 new Product('banana', 'banana.jpg');
@@ -50,35 +51,35 @@ var recentRandomNumbers = [];
 function render(){
 
   var randomIndex = random(0, allProducts.length-1);
-
+  
   while(recentRandomNumbers.includes(randomIndex)){
     randomIndex = random(0, allProducts.length-1);
   }
-
+  
   if(recentRandomNumbers.length > 3){
     recentRandomNumbers.shift();
   }
-
+  
   recentRandomNumbers.push(randomIndex);
-
+  
   allProducts[randomIndex].views++;
-
+  
   productOneEl.src = allProducts[randomIndex].filepath;
   productOneEl.alt = allProducts[randomIndex].name;
   productOneEl.title = allProducts[randomIndex].name;
-
+  
   var randomIndex = random(0, allProducts.length-1);
-
+  
   while(recentRandomNumbers.includes(randomIndex)){
     randomIndex = random(0, allProducts.length-1);
   }
-
+  
   if(recentRandomNumbers.length > 3){
     recentRandomNumbers.shift();
   }
-
+  
   allProducts[randomIndex].views++;
-
+  
   productTwoEl.src = allProducts[randomIndex].filepath;
   productTwoEl.alt = allProducts[randomIndex].name;
   productTwoEl.title = allProducts[randomIndex].name;
@@ -87,7 +88,6 @@ function render(){
 function random(min, max){
   return Math.floor(Math.random() * (max - min +1) + min);
 }
-
 
 function handleClick(e){
   var productName = e.target.title;
@@ -120,57 +120,75 @@ render();
 function renderChart(){
   var namesArray = [];
   var votesArray = [];
-
+  
   for(var i = 0; i < allProducts.length; i++){
     namesArray.push(allProducts[i].name);
     votesArray.push(allProducts[i].votes);
   }
+  function stringifyAndSet(){
+    var stringifyedProducts = JSON.stringify(allProducts);
+    localStorage.setItem('products', stringifyedProducts);
+    console.log('stringified products', stringifyedProducts);
+  }
 
+  console.log('my local storage is: ', localStorage);
+  
+  var localStorageProducts = JSON.parse(localStorage.getItem('products'));
+  console.log('my products from local storage', localStorageProducts);
+  
+  if(localStorage.getItem('products')){
+    allProducts = localStorageProducts;
+  } else {
+    allProducts = [];
+  }
+  // var parsedProducts = JSON.parse(localStorageProducts);
+  // console.log('my parsed products are:', parsedProducts);
 
   var ctx = canvasEl.getContext('2d');
-  
-    new Chart(ctx, {
-      type: 'bar',
-      data: {
-          labels: namesArray, // names of each object
-          datasets: [{
-              label: '# of Votes',
-              data: votesArray, // number of votes for each object
-              backgroundColor: [
-                  'rgba(255, 99, 132, 0.2)',
-                  'rgba(54, 162, 235, 0.2)',
-                  'rgba(255, 206, 86, 0.2)',
-                  'rgba(75, 192, 192, 0.2)',
-                  'rgba(153, 102, 255, 0.2)',
-                  'rgba(255, 159, 64, 0.2)',
-                  'rgba(54, 162, 235, 0.2)',
-                  'rgba(255, 206, 86, 0.2)',
-                  'rgba(75, 192, 192, 0.2)',
-                  'rgba(153, 102, 255, 0.2)'
-              ],
-              borderColor: [
-                  'rgba(255, 99, 132, 1)',
-                  'rgba(54, 162, 235, 1)',
-                  'rgba(255, 206, 86, 1)',
-                  'rgba(75, 192, 192, 1)',
-                  'rgba(153, 102, 255, 1)',
-                  'rgba(255, 159, 64, 1)',
-                  'rgba(75, 192, 192, 1)',
-                  'rgba(153, 102, 255, 1)',
-                  'rgba(255, 159, 64, 1)'
-              ],
-              borderWidth: 1
-          }]
-      },
-      options: {
-          scales: {
-              yAxes: [{
-                  ticks: {
-                      beginAtZero: true
-                  }
-              }]
+
+  new Chart(ctx, {
+    type: 'bar',
+    data: {
+      labels: namesArray, // names of each object
+      datasets: [{
+        label: '# of Votes',
+        data: votesArray, // number of votes for each object
+        backgroundColor: [
+          'rgba(255, 99, 132, 0.2)',
+          'rgba(54, 162, 235, 0.2)',
+          'rgba(255, 206, 86, 0.2)',
+          'rgba(75, 192, 192, 0.2)',
+          'rgba(153, 102, 255, 0.2)',
+          'rgba(255, 159, 64, 0.2)',
+          'rgba(54, 162, 235, 0.2)',
+          'rgba(255, 206, 86, 0.2)',
+          'rgba(75, 192, 192, 0.2)',
+          'rgba(153, 102, 255, 0.2)'
+        ],
+        borderColor: [
+          'rgba(255, 99, 132, 1)',
+          'rgba(54, 162, 235, 1)',
+          'rgba(255, 206, 86, 1)',
+          'rgba(75, 192, 192, 1)',
+          'rgba(153, 102, 255, 1)',
+          'rgba(255, 159, 64, 1)',
+          'rgba(75, 192, 192, 1)',
+          'rgba(153, 102, 255, 1)',
+          'rgba(255, 159, 64, 1)'
+        ],
+        borderWidth: 1
+      }]
+    },
+    options: {
+      scales: {
+        yAxes: [{
+          ticks: {
+            beginAtZero: true
           }
+        }]
       }
+    }
   });
+  stringifyAndSet();
 
 }
