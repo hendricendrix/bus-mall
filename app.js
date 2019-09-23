@@ -1,80 +1,65 @@
-'use strict';
+/* eslint-disable no-irregular-whitespace */
+'use strict';
 
-// render two images to the DOM
-var votesRemaining = 25;
+// render three images to the DOM
+var votesRemaining = 25;
 
-var canvasEl = document.getElementById('my-canvas');
-var productContainerEl = document.getElementById('product-container');
+var canvasEl = document.getElementById('my-canvas');
+var productContainerEl = document.getElementById('product-container');
 
-var resultsEl = document.getElementById('results');
+// eslint-disable-next-line no-unused-vars
+var resultsEl = document.getElementById('results');
 
-var productOneEl = document.getElementById('product-one');
+var productOneEl = document.getElementById('product-one');
 
-var productTwoEl = document.getElementById('product-two');
+var productTwoEl = document.getElementById('product-two');
 
-var allProducts = [];
+var productThreeEl = document.getElementById('product-three');
 
-function Product(name, src){
-  this.name = name;
-  this.filepath = `img/${src}`;
-  this.votes = 0;
-  this.views = 0;
+var allProducts = [];
+
+function Product(name, src){
+  this.name = name;
+  this.filepath = `img/${src}`;
+  this.votes = 0;
+  this.views = 0;
 
   allProducts.push(this);
 }
 
+new Product('bag', 'bag.jpg');
+new Product('banana', 'banana.jpg');
+new Product('bathroom', 'bathroom.jpg');
+new Product('boots', 'boots.jpg');
+new Product('breakfast', 'breakfast.jpg');
+new Product('bubblegum', 'bubblegum.jpg');
+new Product('chair', 'chair.jpg');
+new Product('cthulhu', 'cthulhu.jpg');
+new Product('dog-duck', 'dog-duck.jpg');
+new Product('dragon', 'dragon.jpg');
+new Product('pen', 'pen.jpg');
+new Product('pet-sweep', 'pet-sweep.jpg');
+new Product('scissors', 'scissors.jpg');
+new Product('shark', 'shark.jpg');
+new Product('sweep', 'sweep.png');
+new Product('tauntaun', 'tauntaun.jpg');
+new Product('unicorn', 'unicorn.jpg');
+new Product('usb', 'usb.gif');
+new Product('water-can', 'water-can.jpg');
+new Product('wine-glass', 'wine-glass.jpg');
 
-new Product('bag', 'bag.jpg');
-new Product('banana', 'banana.jpg');
-new Product('bathroom', 'bathroom.jpg');
-new Product('boots', 'boots.jpg');
-new Product('breakfast', 'breakfast.jpg');
-new Product('bubblegum', 'bubblegum.jpg');
-new Product('chair', 'chair.jpg');
-new Product('cthulhu', 'cthulhu.jpg');
-new Product('dog-duck', 'dog-duck.jpg');
-new Product('dragon', 'dragon.jpg');
-new Product('pen', 'pen.jpg');
-new Product('pet-sweep', 'pet-sweep.jpg');
-new Product('scissors', 'scissors.jpg');
-new Product('shark', 'shark.jpg');
-new Product('sweep', 'sweep.png');
-new Product('tauntaun', 'tauntaun.jpg');
-new Product('unicorn', 'unicorn.jpg');
-new Product('usb', 'usb.gif');
-new Product('water-can', 'water-can.jpg');
-new Product('wine-glass', 'wine-glass.jpg');
 
+var recentRandomNumbers = [];
 
-var recentRandomNumbers = [];
+function render(){
 
-// function renderMostViewed(){
-//   var mostViewed;
-//   var clicks = 0;
-//   for(var i = 0; i < allProducts.length; i++){
-//     // loop over my allProducts array
-//     // find the product instance that has the same name as the product that was clicked on
-//     // increment the votes on that product
-//     if(allProducts[i].votes > clicks){
-//       clicks = allProducts[i].votes;
-//       mostViewed = allProducts[i];
-//     }
-//   }
-
-//   //Create h2 and append it to the DOM for displaying results
-//   var h2El = document.createElement('h2');
-//   h2El.textContent = `The most popular product is  ${mostViewed.title} with ${mostViewed.votes} votes`;
-//   resultsEl.appendChild(h2El);
-
-function render(){
-
-  var randomIndex = random(0, allProducts.length-1);
+  var randomIndex = random(0, allProducts.length-1);
 
   while(recentRandomNumbers.includes(randomIndex)){
-    randomIndex = random(0, allProducts.length-1);
+    randomIndex = random(0, allProducts.length-1);
   }
 
-  if(recentRandomNumbers.length > 3){
+  if(recentRandomNumbers.length > 3){
     recentRandomNumbers.shift();
   }
 
@@ -82,47 +67,84 @@ function render(){
 
   allProducts[randomIndex].views++;
 
-  productOneEl.src = allProducts[randomIndex].filepath;
-  productOneEl.alt = allProducts[randomIndex].name;
-  productOneEl.title = allProducts[randomIndex].name;
+  productOneEl.src = allProducts[randomIndex].filepath;
+  productOneEl.alt = allProducts[randomIndex].name;
+  productOneEl.title = allProducts[randomIndex].name;
 
-  var randomIndex = random(0, allProducts.length-1);
+  // eslint-disable-next-line no-redeclare
+  var randomIndex = random(0, allProducts.length-1);
 
   while(recentRandomNumbers.includes(randomIndex)){
-    randomIndex = random(0, allProducts.length-1);
+    randomIndex = random(0, allProducts.length-1);
   }
 
-  if(recentRandomNumbers.length > 3){
+  if(recentRandomNumbers.length > 3){
     recentRandomNumbers.shift();
   }
 
   allProducts[randomIndex].views++;
 
-  productTwoEl.src = allProducts[randomIndex].filepath;
-  productTwoEl.alt = allProducts[randomIndex].name;
-  productTwoEl.title = allProducts[randomIndex].name;
-}
+  productTwoEl.src = allProducts[randomIndex].filepath;
+  productTwoEl.alt = allProducts[randomIndex].name;
+  productTwoEl.title = allProducts[randomIndex].name;
+//
+var randomIndex = random(0, allProducts.length-1);
 
-function random(min, max){
-  return Math.floor(Math.random() * (max - min +1) + min);
-}
-
-
-function handleClick(e){
-  var productName = e.target.title;
-
-  if(e.target.id === 'product-container'){
-    alert('click a product!');
+  while(recentRandomNumbers.includes(randomIndex)){
+    randomIndex = random(0, allProducts.length-1);
   }
 
-  if(votesRemaining === 0){
-    productContainerEl.removeEventListener('click', handleClick);
-    // render the results to the DOM
+  if(recentRandomNumbers.length > 3){
+    recentRandomNumbers.shift();
+  }
+
+  recentRandomNumbers.push(randomIndex);
+
+  allProducts[randomIndex].views++;
+
+  productThreeEl.src = allProducts[randomIndex].filepath;
+  productThreeEl.alt = allProducts[randomIndex].name;
+  productThreeEl.title = allProducts[randomIndex].name;
+
+  var randomIndex = random(0, allProducts.length-1);
+
+  while(recentRandomNumbers.includes(randomIndex)){
+    randomIndex = random(0, allProducts.length-1);
+  }
+
+  if(recentRandomNumbers.length > 3){
+    recentRandomNumbers.shift();
+  }
+
+  recentRandomNumbers.push(randomIndex);
+
+  allProducts[randomIndex].views++;
+
+  productThreeEl.src = allProducts[randomIndex].filepath;
+  productThreeEl.alt = allProducts[randomIndex].name;
+  productThreeEl.title = allProducts[randomIndex].name;
+}
+
+function random(min, max){
+  return Math.floor(Math.random() * (max - min +1) + min);
+}
+
+
+function handleClick(e){
+  var productName = e.target.title;
+
+  if(e.target.id === 'product-container'){
+    alert('click a product!');
+  }
+
+  if(votesRemaining === 0){
+    productContainerEl.removeEventListener('click', handleClick);
+    // render the results to the DOM
     renderChart();
   }
 
-  for(var i = 0; i < allProducts.length; i++){
-    if(productName === allProducts[i].name){
+  for(var i = 0; i < allProducts.length; i++){
+    if(productName === allProducts[i].name){
       allProducts[i].votes++;
       votesRemaining--;
     }
@@ -130,84 +152,92 @@ function handleClick(e){
   render();
 }
 
-productContainerEl.addEventListener('click', handleClick);
+productContainerEl.addEventListener('click', handleClick);
 
 render();
 
 ////////////////////////////////////
 
-function renderChart(){
-  var namesArray = [];
-  var votesArray = [];
+function renderChart(){
+  var namesArray = [];
+  var votesArray = [];
 
-  for(var i = 0; i < allProducts.length; i++){
+  for(var i = 0; i < allProducts.length; i++){
     namesArray.push(allProducts[i].name);
     votesArray.push(allProducts[i].votes);
   }
-  function stringifyAndSet(){
-    var stringifyedProducts = JSON.stringify(allProducts);
-    localStorage.setItem('products', stringifyedProducts);
-    console.log('stringified products', stringifyedProducts);
-  }
 
-  console.log('my local storage is: ', localStorage);
+  var ctx = canvasEl.getContext('2d');
 
-  var localStorageProducts = JSON.parse(localStorage.getItem('products'));
-  console.log('my products from local storage', localStorageProducts);
-
-  if(localStorage.getItem('products')){
-    allProducts = localStorageProducts;
-  } else {
-    allProducts = [];
-  }
-  // var parsedProducts = JSON.parse(localStorageProducts);
-  // console.log('my parsed products are:', parsedProducts);
-
-  var ctx = canvasEl.getContext('2d');
-
-  new Chart(ctx, {
-    type: 'bar',
-    data: {
-      labels: namesArray, // names of each object
-      datasets: [{
-        label: '# of Votes',
-        data: votesArray, // number of votes for each object
-        backgroundColor: [
-          'rgba(255, 99, 132, 0.2)',
-          'rgba(54, 162, 235, 0.2)',
-          'rgba(255, 206, 86, 0.2)',
-          'rgba(75, 192, 192, 0.2)',
-          'rgba(153, 102, 255, 0.2)',
-          'rgba(255, 159, 64, 0.2)',
-          'rgba(54, 162, 235, 0.2)',
-          'rgba(255, 206, 86, 0.2)',
-          'rgba(75, 192, 192, 0.2)',
-          'rgba(153, 102, 255, 0.2)'
+  // eslint-disable-next-line no-undef
+  new Chart(ctx, {
+    type: 'bar',
+    data: {
+      labels: namesArray, // names of each object
+      datasets: [{
+        label: '# of Votes',
+        data: votesArray, // number of votes for each object
+        backgroundColor: [
+          'rgba(255, 99, 132, 0.2)',
+          'rgba(54, 162, 235, 0.2)',
+          'rgba(255, 206, 86, 0.2)',
+          'rgba(75, 192, 192, 0.2)',
+          'rgba(153, 102, 255, 0.2)',
+          'rgba(255, 159, 64, 0.2)',
+          'rgba(54, 162, 235, 0.2)',
+          'rgba(255, 206, 86, 0.2)',
+          'rgba(75, 192, 192, 0.2)',
+          'rgba(153, 102, 255, 0.2)'
         ],
-        borderColor: [
-          'rgba(255, 99, 132, 1)',
-          'rgba(54, 162, 235, 1)',
-          'rgba(255, 206, 86, 1)',
-          'rgba(75, 192, 192, 1)',
-          'rgba(153, 102, 255, 1)',
-          'rgba(255, 159, 64, 1)',
-          'rgba(75, 192, 192, 1)',
-          'rgba(153, 102, 255, 1)',
-          'rgba(255, 159, 64, 1)'
+        borderColor: [
+          'rgba(255, 99, 132, 1)',
+          'rgba(54, 162, 235, 1)',
+          'rgba(255, 206, 86, 1)',
+          'rgba(75, 192, 192, 1)',
+          'rgba(153, 102, 255, 1)',
+          'rgba(255, 159, 64, 1)',
+          'rgba(75, 192, 192, 1)',
+          'rgba(153, 102, 255, 1)',
+          'rgba(255, 159, 64, 1)'
         ],
-        borderWidth: 1
-      }]
+         borderWidth: 1,
+      }],
     },
     options: {
       scales: {
         yAxes: [{
           ticks: {
-            beginAtZero: true
-          }
-        }]
-      }
-    }
+            beginAtZero: true,
+            //y-axis integers to whole numbers
+            callback: function(value) {if (value % 1 === 0) {return value;}},
+          },
+        }],
+      },
+    },
   });
   stringifyAndSet();
-
 }
+
+
+
+function stringifyAndSet() {
+  ////////////stringify////////
+  var stringifyProducts = JSON.stringify(allProducts);
+  //////////////store it in local storage/////////
+  localStorage.setItem('products', stringifyProducts);
+}
+
+
+//////////get item from local storage and parse/
+var localStorageGetProducts = JSON.parse(localStorage.getItem('products'));
+
+
+if (localStorage.getItem('products')) {
+  allProducts = localStorageGetProducts;
+} else {
+  createNewProducts();
+}
+
+console.log('parsed all products', localStorageGetProducts);
+
+render();
