@@ -87,8 +87,8 @@ function render(){
   productTwoEl.src = allProducts[randomIndex].filepath;
   productTwoEl.alt = allProducts[randomIndex].name;
   productTwoEl.title = allProducts[randomIndex].name;
-//
-var randomIndex = random(0, allProducts.length-1);
+  //
+  var randomIndex = random(0, allProducts.length-1);
 
   while(recentRandomNumbers.includes(randomIndex)){
     randomIndex = random(0, allProducts.length-1);
@@ -200,7 +200,7 @@ function renderChart(){
           'rgba(153, 102, 255, 1)',
           'rgba(255, 159, 64, 1)'
         ],
-         borderWidth: 1,
+        borderWidth: 1,
       }],
     },
     options: {

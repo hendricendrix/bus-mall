@@ -4,7 +4,6 @@ canvas{
 .img-container{
   height: 70%;
   background-position: center;
-  backround-repeat: no-repeat;
   background-size: cover;
   position: relative;
 }
