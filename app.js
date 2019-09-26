@@ -172,12 +172,12 @@ function renderChart(){
     for (var i = 0; i < allProducts.length; i++){
       if (allProducts[i].votes > 0) {
         namesArr.push(allProducts[i].name);
-        
+
         votesArr.push(allProducts[i].votes);
       }
     }
   }
-  
+
   var myChart = new Chart(ctx, {
     type: 'bar',
     data: {
