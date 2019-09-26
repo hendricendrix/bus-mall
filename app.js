@@ -85,7 +85,7 @@ function generatePicture(domEl){
 }
 
 function appendToDom(index, domEl){
-  domEl.src = allProducts[index].src;
+  domEl.src = allProducts[index].filepath;
   domEl.alt = allProducts[index].name;
   domEl.title = allProducts[index].name;
 }
